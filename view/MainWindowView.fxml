@@ -43,7 +43,7 @@
       </TableView>
       <LineChart fx:id="mainChart" layoutY="25.0" prefHeight="476.0" prefWidth="314.0" title="Potencjal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
         <xAxis>
-          <CategoryAxis label="Potencjal" side="BOTTOM" fx:id="xAxis" />
+          <NumberAxis label="Potencjal" side="BOTTOM" fx:id="xAxis" />
         </xAxis>
         <yAxis>
           <NumberAxis fx:id="yAxis" label="Prunt" side="LEFT" />

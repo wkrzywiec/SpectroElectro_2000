@@ -44,7 +44,7 @@ public class ElectroModel {
 		
 		for (int i = 0; i < axisX.size(); i++) {
 			series.getData().add(new XYChart.Data(
-					getAxisX(i).toString(),
+					getAxisX(i),
 					getAxisY(i)
 					));
 		}

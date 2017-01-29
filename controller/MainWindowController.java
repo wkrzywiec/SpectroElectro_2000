@@ -31,7 +31,7 @@ public class MainWindowController {
 	@FXML private MenuItem menuLoadChartData;
 	@FXML private LineChart<String, Number> mainChart;
 	@FXML private NumberAxis yAxis;
-	@FXML private CategoryAxis xAxis;
+	@FXML private NumberAxis xAxis;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
 	
