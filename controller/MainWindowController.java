@@ -29,7 +29,7 @@ public class MainWindowController {
 	
 	@FXML private ListView<ElectroModel> chartListView;
 	@FXML private MenuItem menuLoadChartData;
-	@FXML private LineChart<String, Number> mainChart;
+	@FXML private LineChart<Number, Number> mainChart;
 	@FXML private NumberAxis yAxis;
 	@FXML private NumberAxis xAxis;
 	
@@ -41,6 +41,8 @@ public class MainWindowController {
 		chartListView.setCellFactory(new ElectroModelCellFactory());
 		yAxis.setAutoRanging(true);
 		xAxis.setAutoRanging(true);
+		mainChart.setCreateSymbols(false);
+		
 	}
 	
 	public void loadChartData() {
