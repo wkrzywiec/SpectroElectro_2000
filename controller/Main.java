@@ -30,6 +30,7 @@ public class Main extends Application {
 			primaryStage.setMinHeight(530);
 			primaryStage.setMinWidth(1010);
 			Scene scene = new Scene(pane);
+			scene.getStylesheets().add("/view/application.css");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {

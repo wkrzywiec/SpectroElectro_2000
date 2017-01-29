@@ -15,10 +15,13 @@ import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import model.ChartDataModel;
 import model.ElectroModel;
 import model.ElectroModelCell;
 import model.ElectroModelCellFactory;
@@ -29,22 +32,22 @@ public class MainWindowController {
 	
 	@FXML private ListView<ElectroModel> chartListView;
 	@FXML private MenuItem menuLoadChartData;
-	@FXML private LineChart<Number, Number> mainChart;
+	@FXML private ScatterChart<Number, Number> mainChart;
 	@FXML private NumberAxis yAxis;
 	@FXML private NumberAxis xAxis;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
-	
-	
+
 	public void initialize() {
 		chartListView.setItems(electroChartList);
 		chartListView.setCellFactory(new ElectroModelCellFactory());
 		yAxis.setAutoRanging(true);
 		xAxis.setAutoRanging(true);
-		mainChart.setCreateSymbols(false);
+		mainChart.getStyleClass().add(getClass().getResource("/view/application.css").toExternalForm());
 		
 	}
 	
+
 	public void loadChartData() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Wybierz plik z danymi");
@@ -53,7 +56,7 @@ public class MainWindowController {
 
 		try {
 			ElectroModel chart = new ElectroModel();
-			
+			chart.setName(selectedFile.getName());
 			Scanner in = new Scanner(selectedFile);
 			in.nextLine();
 			in.nextLine();
@@ -66,26 +69,13 @@ public class MainWindowController {
 			}
 			
 			electroChartList.add(chart);
-			
 			chart.createSeries();
 			mainChart.getData().addAll(chart.getSeries());
-			
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void dataTest() {
-		
-		for (int a = 0; a < 20; a++) {
-			System.out.println(
-			electroChartList.get(0).getAxisX(a).toString() + " " + electroChartList.get(0).getAxisY(a).toString()
-			);
-		}
-		
-		
-	}
-	
+
 	
 }

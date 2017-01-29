@@ -5,24 +5,18 @@ import java.util.ArrayList;
 import javafx.scene.chart.XYChart;
 
 public class ElectroModel {
-	private String name = "NoName";
+	private String scanName, sampleName, description, date;
+	private String descriptionRow;
 	private ArrayList<Double> axisX = new ArrayList<Double>();
 	private ArrayList<Double> axisY = new ArrayList<Double>();
 	private XYChart.Series series = new XYChart.Series();
 	
-	public ElectroModel () {
-	}
-	
-	public ElectroModel (String name) {
-		this.name = name;
-	}
-	
 	public String getName() {
-		return name;
+		return scanName;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String scanName) {
+		this.scanName = scanName;
 	}
 	
 	public Double getAxisX(int i) {

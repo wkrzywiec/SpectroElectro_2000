@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -11,14 +16,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="350.0" minWidth="500.0" prefHeight="501.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
+<AnchorPane minHeight="350.0" minWidth="500.0" prefHeight="501.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindowController">
    <children>
-      <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutY="2.0" style="-fx-background-color: FFFFFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem fx:id="menuLoadChartData" mnemonicParsing="false" onAction="#loadChartData" text="Import data" />
-                  <MenuItem fx:id="menuTest" mnemonicParsing="false" onAction="#dataTest" text="Test" />
+                  <MenuItem fx:id="menuTest" mnemonicParsing="false" text="Test" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -34,20 +39,35 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" prefHeight="200.0" prefWidth="218.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
-      <TableView layoutX="532.0" layoutY="224.0" prefHeight="277.0" prefWidth="218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="223.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <LineChart fx:id="mainChart" layoutY="25.0" prefHeight="476.0" prefWidth="314.0" title="Potencjal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
+      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <ScatterChart fx:id="mainChart" layoutY="24.0" prefHeight="478.0" prefWidth="533.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
         <xAxis>
-          <NumberAxis label="Potencjal" side="BOTTOM" fx:id="xAxis" />
+          <NumberAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="yAxis" label="Prunt" side="LEFT" />
+          <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
-      </LineChart>
+      </ScatterChart>
+      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <VBox layoutX="526.0" layoutY="263.0" spacing="28.0">
+               <children>
+                  <Label layoutX="526.0" layoutY="255.0" text="Sample Name: " />
+                  <Label layoutX="526.0" layoutY="302.0" text="Scan Name: " />
+                  <Label layoutX="526.0" layoutY="339.0" prefHeight="17.0" prefWidth="72.0" text="Description:" />
+               </children>
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="606.0" layoutY="251.0" spacing="20.0">
+               <children>
+                  <TextField layoutX="614.0" layoutY="251.0" prefHeight="25.0" prefWidth="131.0" promptText="Sample Name" />
+                  <TextField layoutX="614.0" layoutY="298.0" prefHeight="25.0" prefWidth="131.0" promptText="Scan Name" />
+                  <TextArea layoutX="614.0" layoutY="339.0" prefHeight="140.0" prefWidth="131.0" promptText="Scan Description" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
