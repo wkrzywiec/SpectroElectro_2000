@@ -2,12 +2,14 @@
     -fx-background-radius: 1px;
     
 }
-
 .chart-symbol { 
     -fx-background-radius: 1px;
     -fx-padding: 2px;
 }
-
 .root {
 	-fx-background-color: #FFFFFF;
+}
+.hbox {
+	-fx-border-color: #8C8888;
+    -fx-border-width: 1px;
 }

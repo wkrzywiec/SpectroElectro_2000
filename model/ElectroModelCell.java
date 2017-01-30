@@ -13,7 +13,7 @@ public class ElectroModelCell extends ListCell<ElectroModel> {
 		if (item == null || empty) {
 		}
 		else {
-			name = item.getName();
+			name = item.getScanName();
 		}
 		this.setText(name);
 	}

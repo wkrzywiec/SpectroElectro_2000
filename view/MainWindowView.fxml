@@ -39,7 +39,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
       <ScatterChart fx:id="mainChart" layoutY="24.0" prefHeight="478.0" prefWidth="533.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
         <xAxis>
           <NumberAxis side="BOTTOM" fx:id="xAxis" />
@@ -48,7 +48,7 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </ScatterChart>
-      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" style="-fx-border-color: 8C8888;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
          <children>
             <VBox layoutX="526.0" layoutY="263.0" spacing="28.0">
                <children>
@@ -62,9 +62,9 @@
             </VBox>
             <VBox layoutX="606.0" layoutY="251.0" spacing="20.0">
                <children>
-                  <TextField layoutX="614.0" layoutY="251.0" prefHeight="25.0" prefWidth="131.0" promptText="Sample Name" />
-                  <TextField layoutX="614.0" layoutY="298.0" prefHeight="25.0" prefWidth="131.0" promptText="Scan Name" />
-                  <TextArea layoutX="614.0" layoutY="339.0" prefHeight="140.0" prefWidth="131.0" promptText="Scan Description" />
+                  <TextField fx:id="txtSample" layoutX="614.0" layoutY="251.0" onAction="#changeSampleTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Sample Name" />
+                  <TextField fx:id="txtScan" layoutX="614.0" layoutY="298.0" onAction="#changeScanTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Scan Name" />
+                  <TextArea fx:id="txtDescription" layoutX="614.0" layoutY="339.0" prefHeight="140.0" prefWidth="131.0" promptText="Scan Description" />
                </children>
             </VBox>
          </children>

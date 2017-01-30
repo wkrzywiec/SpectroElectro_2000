@@ -17,6 +17,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -33,8 +35,9 @@ public class MainWindowController {
 	@FXML private ListView<ElectroModel> chartListView;
 	@FXML private MenuItem menuLoadChartData;
 	@FXML private ScatterChart<Number, Number> mainChart;
-	@FXML private NumberAxis yAxis;
-	@FXML private NumberAxis xAxis;
+	@FXML private NumberAxis yAxis, xAxis;
+	@FXML private TextField txtSample, txtScan;
+	@FXML private TextArea txtDescription;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
 
@@ -46,7 +49,6 @@ public class MainWindowController {
 		mainChart.getStyleClass().add(getClass().getResource("/view/application.css").toExternalForm());
 		
 	}
-	
 
 	public void loadChartData() {
 		FileChooser fileChooser = new FileChooser();
@@ -55,8 +57,8 @@ public class MainWindowController {
 		File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
 		try {
-			ElectroModel chart = new ElectroModel();
-			chart.setName(selectedFile.getName());
+			ElectroModel electroModel = new ElectroModel();
+			electroModel.setScanName(selectedFile.getName());
 			Scanner in = new Scanner(selectedFile);
 			in.nextLine();
 			in.nextLine();
@@ -64,18 +66,34 @@ public class MainWindowController {
 	        df.setMaximumFractionDigits(8);
 	        
 			while (in.hasNext()) {
-				chart.addAxisX(in.nextDouble());
-				chart.addAxisY(Double.parseDouble(in.next()));
+				electroModel.addAxisX(in.nextDouble());
+				electroModel.addAxisY(Double.parseDouble(in.next()));
 			}
 			
-			electroChartList.add(chart);
-			chart.createSeries();
-			mainChart.getData().addAll(chart.getSeries());
+			electroChartList.add(electroModel);
+			electroModel.createSeries();
+			mainChart.getData().addAll(electroModel.getSeries());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public void setTextFields() {
+		txtSample.setText(chartListView.getSelectionModel().getSelectedItem().getSampleName());
+		txtScan.setText(chartListView.getSelectionModel().getSelectedItem().getScanName());
+		txtDescription.setText(chartListView.getSelectionModel().getSelectedItem().getDescription());
+	}
 	
+	public void changeSampleTextFields() {
+		chartListView.getSelectionModel().getSelectedItem().setSampleName(txtSample.getText());
+	}
+	
+	public void changeScanTextFields() {
+		chartListView.getSelectionModel().getSelectedItem().setScanName(txtScan.getText());
+	}
+	
+	public void changeDescriptionTextFields() {
+		chartListView.getSelectionModel().getSelectedItem().setDescription(txtDescription.getText());
+	}
 }
