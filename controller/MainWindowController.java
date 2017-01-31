@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.collections.FXCollections;
@@ -54,29 +55,36 @@ public class MainWindowController {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Wybierz plik z danymi");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki tekstowe .ocw", "*.ocw"));
-		File selectedFile = fileChooser.showOpenDialog(primaryStage);
-
-		try {
-			ElectroModel electroModel = new ElectroModel();
-			electroModel.setScanName(selectedFile.getName());
-			Scanner in = new Scanner(selectedFile);
-			in.nextLine();
-			in.nextLine();
-			DecimalFormat df = new DecimalFormat("#");
-	        df.setMaximumFractionDigits(8);
-	        
-			while (in.hasNext()) {
-				electroModel.addAxisX(in.nextDouble());
-				electroModel.addAxisY(Double.parseDouble(in.next()));
-			}
-			
-			electroChartList.add(electroModel);
-			electroModel.createSeries();
-			mainChart.getData().addAll(electroModel.getSeries());
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		
+		List<File> selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
+		//File selectedFile = fileChooser.showOpenDialog(primaryStage);
+		
+		 if (selectedFiles != null) {
+			 for (File file :selectedFiles) {
+				 try {
+						ElectroModel electroModel = new ElectroModel();
+						electroModel.setScanName(file.getName());
+						Scanner in = new Scanner(file);
+						in.nextLine();
+						in.nextLine();
+						DecimalFormat df = new DecimalFormat("#");
+				        df.setMaximumFractionDigits(8);
+				        
+						while (in.hasNext()) {
+							electroModel.addAxisX(in.nextDouble());
+							electroModel.addAxisY(Double.parseDouble(in.next()));
+						}
+						
+						electroChartList.add(electroModel);
+						electroModel.createSeries();
+						mainChart.getData().addAll(electroModel.getSeries());
+						
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+			 }
+		 }
+		
 	}
 
 	public void setTextFields() {
