@@ -39,7 +39,15 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="menuAddChart" mnemonicParsing="false" onAction="#addModelToChart" text="Add to chart" />
+                  <MenuItem fx:id="menuRemoveChart" mnemonicParsing="false" onAction="#removeModelFromChart" text="Remove from chart" />
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
       <ScatterChart fx:id="mainChart" layoutY="24.0" prefHeight="478.0" prefWidth="533.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
         <xAxis>
           <NumberAxis side="BOTTOM" fx:id="xAxis" />
