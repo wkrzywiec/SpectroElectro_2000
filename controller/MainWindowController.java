@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
@@ -41,7 +43,8 @@ public class MainWindowController {
 	@FXML private NumberAxis yAxis, xAxis;
 	@FXML private TextField txtSample, txtScan;
 	@FXML private TextArea txtDescription;
-	@FXML private MenuItem menuAddChart, menuRemoveChart, menuClose;
+	@FXML private CheckBox checkChart;
+	@FXML private MenuItem menuAddChart, menuRemoveChart, menuClose, menuExportToExcel;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
 
@@ -101,5 +104,34 @@ public class MainWindowController {
 	
 	public void removeModelFromChart() {
 		mainChart.getData().remove(chartListView.getSelectionModel().getSelectedItem().getSeries());
+	}
+	
+	public void exportToExcel() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Zapisz do pliku");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki MS Excel", "*.xls"));
+		File file = fileChooser.showSaveDialog(primaryStage);
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(file);
+			ElectroModel modelToSave = electroChartList.get(0);
+			out.write("Sample Name \t" + modelToSave.getSampleName() + "\n");
+			out.write("Scan Name \t" + modelToSave.getScanName() + "\n");
+			out.write("Scan Description \t" + modelToSave.getDescription() + "\n");
+			out.write("\n");
+			for (int i = 0; i< modelToSave.getPointCount(); i++){
+				out.write(modelToSave.getAxisX(i).toString());
+				out.write("\t");
+				out.write(modelToSave.getAxisY(i).toString());
+				out.write("\t");
+				out.write("\n");
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (out!=null) out.close();
+		}
 	}
 }

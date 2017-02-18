@@ -38,7 +38,7 @@
                   <Menu mnemonicParsing="false" text="Export data">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Export to CSV" />
-                        <MenuItem mnemonicParsing="false" text="Export to Excel" />
+                        <MenuItem fx:id="menuExportToExcel" mnemonicParsing="false" onAction="#exportToExcel" text="Export to Excel" />
                       <MenuItem mnemonicParsing="false" text="Export to txt" />
                     </items>
                   </Menu>
@@ -58,16 +58,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="182.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-         <contextMenu>
-            <ContextMenu>
-              <items>
-                <MenuItem fx:id="menuAddChart" mnemonicParsing="false" onAction="#addModelToChart" text="Add to chart" />
-                  <MenuItem fx:id="menuRemoveChart" mnemonicParsing="false" onAction="#removeModelFromChart" text="Remove from chart" />
-              </items>
-            </ContextMenu>
-         </contextMenu></ListView>
-      <ScatterChart fx:id="mainChart" layoutY="24.0" prefHeight="478.0" prefWidth="533.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="218.0" AnchorPane.topAnchor="25.0">
+      <ScatterChart fx:id="mainChart" layoutY="24.0" prefHeight="476.0" prefWidth="522.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="25.0">
         <xAxis>
           <NumberAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
@@ -75,33 +66,47 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </ScatterChart>
-      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+      <ListView fx:id="chartListView" layoutX="527.0" layoutY="35.0" onMouseClicked="#setTextFields" prefHeight="175.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="291.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="35.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="menuAddChart" mnemonicParsing="false" onAction="#addModelToChart" text="Add to chart" />
+                  <MenuItem fx:id="menuRemoveChart" mnemonicParsing="false" onAction="#removeModelFromChart" text="Remove from chart" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </ListView>
+      <VBox layoutX="527.0" layoutY="216.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0">
          <children>
-            <VBox layoutX="526.0" layoutY="263.0" spacing="26.0">
+            <Label layoutX="527.0" layoutY="220.0" text="Chart Details" underline="true" AnchorPane.bottomAnchor="267.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="214.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox layoutX="527.0" layoutY="250.0" prefHeight="241.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
                <children>
-                  <Label layoutX="526.0" layoutY="255.0" text="Sample Name: " />
-                  <Label layoutX="526.0" layoutY="302.0" text="Scan Name: " />
-                  <Label text="Show:" />
-                  <Label layoutX="526.0" layoutY="339.0" prefHeight="11.0" prefWidth="72.0" text="Description:" />
+                  <VBox layoutX="526.0" layoutY="263.0" spacing="26.0">
+                     <children>
+                        <Label layoutX="526.0" layoutY="255.0" text="Sample Name: " />
+                        <Label layoutX="526.0" layoutY="302.0" text="Scan Name: " />
+                        <Label text="Show:" />
+                        <Label layoutX="526.0" layoutY="339.0" prefHeight="11.0" prefWidth="72.0" text="Description:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox layoutX="606.0" layoutY="251.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="txtSample" layoutX="614.0" layoutY="251.0" onAction="#changeSampleTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Sample Name" />
+                        <TextField fx:id="txtScan" layoutX="614.0" layoutY="298.0" onAction="#changeScanTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Scan Name" />
+                        <CheckBox fx:id="checkChart" mnemonicParsing="false" text="Add to chart" />
+                        <TextArea fx:id="txtDescription" layoutX="614.0" layoutY="339.0" prefHeight="115.0" prefWidth="131.0" promptText="Scan Description" />
+                     </children>
+                  </VBox>
                </children>
-               <HBox.margin>
-                  <Insets top="3.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox layoutX="606.0" layoutY="251.0" spacing="20.0">
-               <children>
-                  <TextField fx:id="txtSample" layoutX="614.0" layoutY="251.0" onAction="#changeSampleTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Sample Name" />
-                  <TextField fx:id="txtScan" layoutX="614.0" layoutY="298.0" onAction="#changeScanTextFields" prefHeight="25.0" prefWidth="131.0" promptText="Scan Name" />
-                  <CheckBox mnemonicParsing="false" text="Add to chart" />
-                  <TextArea fx:id="txtDescription" layoutX="614.0" layoutY="339.0" prefHeight="115.0" prefWidth="131.0" promptText="Scan Description" />
-               </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
-      <Label layoutX="530.0" layoutY="214.0" text="Chart Details" underline="true">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
+      </VBox>
    </children>
 </AnchorPane>

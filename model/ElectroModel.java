@@ -10,6 +10,7 @@ public class ElectroModel {
 	private ArrayList<Double> axisX = new ArrayList<Double>();
 	private ArrayList<Double> axisY = new ArrayList<Double>();
 	private XYChart.Series series = new XYChart.Series();
+	private int pointCount = 0;
 	
 	public String getScanName() {
 		return scanName;
@@ -65,5 +66,8 @@ public class ElectroModel {
 		return series;
 	}
 
-	
+	public int getPointCount(){
+		pointCount = axisX.size();
+		return pointCount;
+	}
 }
