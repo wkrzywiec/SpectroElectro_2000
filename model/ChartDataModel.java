@@ -9,7 +9,6 @@ public class ChartDataModel {
 		this.scan = scan;
 		this.description = description;
 		this.date = date;
-		
 	}
 	
 	public String getScanName(){
