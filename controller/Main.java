@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
@@ -28,6 +27,7 @@ public class Main extends Application {
 			AnchorPane pane = loader.load();
 			
 			MainWindowController mainWindowController = loader.getController();
+			mainWindowController.setStage(primaryStage);
 			primaryStage.setMinHeight(530);
 			primaryStage.setMinWidth(1010);
 			Scene scene = new Scene(pane);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.chart.*?>
@@ -22,9 +23,26 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="menuLoadChartData" mnemonicParsing="false" onAction="#loadChartData" text="Import data" />
-                  <MenuItem fx:id="menuTest" mnemonicParsing="false" text="Test" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="New...            " />
+                  <MenuItem mnemonicParsing="false" text="Open File..." />
+                  <MenuItem fx:id="menuTest" mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Save As..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu mnemonicParsing="false" text="Import data">
+                    <items>
+                        <MenuItem fx:id="menuLoadChartData" mnemonicParsing="false" onAction="#loadChartData" text="CV data" />
+                      <MenuItem mnemonicParsing="false" text="UV-vis data" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Export data">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Export to CSV" />
+                        <MenuItem mnemonicParsing="false" text="Export to Excel" />
+                      <MenuItem mnemonicParsing="false" text="Export to txt" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#closeStage" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -39,7 +57,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="209.0" prefWidth="218.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <ListView fx:id="chartListView" layoutX="532.0" layoutY="24.0" onMouseClicked="#setTextFields" prefHeight="209.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <contextMenu>
             <ContextMenu>
               <items>
@@ -56,7 +74,7 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </ScatterChart>
-      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" style="-fx-border-color: 8C8888;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
+      <HBox layoutX="537.0" layoutY="251.0" prefHeight="241.0" prefWidth="211.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="5.0">
          <children>
             <VBox layoutX="526.0" layoutY="263.0" spacing="28.0">
                <children>

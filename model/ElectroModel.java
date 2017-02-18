@@ -57,6 +57,7 @@ public class ElectroModel {
 					getAxisX(i),
 					getAxisY(i)
 					));
+		series.setName(scanName);
 		}
 	}
 	

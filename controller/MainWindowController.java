@@ -26,6 +26,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.ChartDataModel;
+import model.DataConverter;
 import model.ElectroModel;
 import model.ElectroModelCell;
 import model.ElectroModelCellFactory;
@@ -40,7 +41,7 @@ public class MainWindowController {
 	@FXML private NumberAxis yAxis, xAxis;
 	@FXML private TextField txtSample, txtScan;
 	@FXML private TextArea txtDescription;
-	@FXML private MenuItem menuAddChart, menuRemoveChart;
+	@FXML private MenuItem menuAddChart, menuRemoveChart, menuClose;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
 
@@ -51,7 +52,14 @@ public class MainWindowController {
 		yAxis.setAutoRanging(true);
 		xAxis.setAutoRanging(true);
 		mainChart.getStyleClass().add(getClass().getResource("/view/application.css").toExternalForm());
-		
+	}
+	
+	public void setStage(Stage primaryStage){
+		this.primaryStage = primaryStage;
+	}
+	
+	public void closeStage() {
+		primaryStage.close();
 	}
 
 	public void loadChartData() {
@@ -59,33 +67,14 @@ public class MainWindowController {
 		fileChooser.setTitle("Wybierz plik z danymi");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki tekstowe .ocw", "*.ocw"));
 		List<File> selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
-		
+		DataConverter dataConverter = new DataConverter();
 		 if (selectedFiles != null) {
 			 for (File file :selectedFiles) {
-				 try {
-						ElectroModel electroModel = new ElectroModel();
-						electroModel.setScanName(file.getName());
-						Scanner in = new Scanner(file);
-						in.nextLine();
-						in.nextLine();
-						DecimalFormat df = new DecimalFormat("#");
-				        df.setMaximumFractionDigits(8);
-				        
-						while (in.hasNext()) {
-							electroModel.addAxisX(in.nextDouble());
-							electroModel.addAxisY(Double.parseDouble(in.next()));
-						}
-						
-						electroChartList.add(electroModel);
-						electroModel.createSeries();
-						//mainChart.getData().addAll(electroModel.getSeries());
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					}
+				ElectroModel electroModel = dataConverter.convertFile(file);
+				electroChartList.add(electroModel);
+				electroModel.createSeries();
 			 }
 		 }
-		
 	}
 
 	public void setTextFields() {
