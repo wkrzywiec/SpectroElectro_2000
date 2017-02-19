@@ -32,26 +32,33 @@ import model.DataConverter;
 import model.ElectroModel;
 import model.ElectroModelCell;
 import model.ElectroModelCellFactory;
+import model.SpectroModel;
+import model.SpectroModelCellFactory;
 
 public class MainWindowController {
 
 	private Stage primaryStage;
 	
-	@FXML private ListView<ElectroModel> chartListView;
+	@FXML private ListView<ElectroModel> electroChartListView;
+	@FXML private ListView<SpectroModel> spectroChartListView;
 	@FXML private MenuItem menuLoadChartData;
 	@FXML private ScatterChart<Number, Number> mainChart;
 	@FXML private NumberAxis yAxis, xAxis;
 	@FXML private TextField txtSample, txtScan;
 	@FXML private TextArea txtDescription;
 	@FXML private CheckBox checkChart;
-	@FXML private MenuItem menuAddChart, menuRemoveChart, menuClose, menuExportToExcel;
+	@FXML private MenuItem menuAddSpectroChart, menuRemoveSpectroChart, menuAddElectroChart, menuRemoveElectroChart, menuClose, menuExportToExcel;
 	
 	private ObservableList<ElectroModel> electroChartList = FXCollections.observableArrayList();
+	private ObservableList<SpectroModel> spectroChartList = FXCollections.observableArrayList();
 
 	public void initialize() {
-		chartListView.setItems(electroChartList);
-		chartListView.setCellFactory(new ElectroModelCellFactory());
-		chartListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		electroChartListView.setItems(electroChartList);
+		electroChartListView.setCellFactory(new ElectroModelCellFactory());
+		electroChartListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		spectroChartListView.setItems(spectroChartList);
+		spectroChartListView.setCellFactory(new SpectroModelCellFactory());
+		spectroChartListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		yAxis.setAutoRanging(true);
 		xAxis.setAutoRanging(true);
 		mainChart.getStyleClass().add(getClass().getResource("/view/application.css").toExternalForm());
@@ -67,43 +74,62 @@ public class MainWindowController {
 
 	public void loadChartData() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Wybierz plik z danymi");
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki tekstowe .ocw", "*.ocw"));
+		fileChooser.setTitle("Select data file");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("OCW file (Cyclic voltammograms) .ocw", "*.ocw"));
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("CSV file (Absorption spectra) .csv", "*.csv"));
 		List<File> selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
 		DataConverter dataConverter = new DataConverter();
-		 if (selectedFiles != null) {
+		if (selectedFiles != null) {
 			 for (File file :selectedFiles) {
-				ElectroModel electroModel = dataConverter.convertFile(file);
-				electroChartList.add(electroModel);
-				electroModel.createSeries();
+				if (file.getName().substring(file.getName().lastIndexOf(".")).equals(".ocw")){
+					ElectroModel electroModel = dataConverter.convertFileToElectro(file);
+					electroChartList.add(electroModel);
+					electroModel.createSeries();
+				} else if (file.getName().substring(file.getName().lastIndexOf(".")).equals(".csv")) {
+					SpectroModel spectroModel = dataConverter.convertFileToSpectro(file);
+					spectroChartList.add(spectroModel);
+					spectroModel.createSeries();
+					for (int i =0; i<spectroModel.getPointCount(); i++){
+						System.out.print(spectroModel.getAxisX(i) + " ");
+						System.out.println(spectroModel.getAxisY(i));
+					}	
+				}
 			 }
 		 }
 	}
 
 	public void setTextFields() {
-		txtSample.setText(chartListView.getSelectionModel().getSelectedItem().getSampleName());
-		txtScan.setText(chartListView.getSelectionModel().getSelectedItem().getScanName());
-		txtDescription.setText(chartListView.getSelectionModel().getSelectedItem().getDescription());
+		txtSample.setText(electroChartListView.getSelectionModel().getSelectedItem().getSampleName());
+		txtScan.setText(electroChartListView.getSelectionModel().getSelectedItem().getScanName());
+		txtDescription.setText(electroChartListView.getSelectionModel().getSelectedItem().getDescription());
 	}
 	
 	public void changeSampleTextFields() {
-		chartListView.getSelectionModel().getSelectedItem().setSampleName(txtSample.getText());
+		electroChartListView.getSelectionModel().getSelectedItem().setSampleName(txtSample.getText());
 	}
 	
 	public void changeScanTextFields() {
-		chartListView.getSelectionModel().getSelectedItem().setScanName(txtScan.getText());
+		electroChartListView.getSelectionModel().getSelectedItem().setScanName(txtScan.getText());
 	}
 	
 	public void changeDescriptionTextFields() {
-		chartListView.getSelectionModel().getSelectedItem().setDescription(txtDescription.getText());
+		electroChartListView.getSelectionModel().getSelectedItem().setDescription(txtDescription.getText());
 	}
 	
-	public void addModelToChart() {
-		mainChart.getData().addAll(chartListView.getSelectionModel().getSelectedItem().getSeries());
+	public void addSpectroModelToChart() {
+		mainChart.getData().addAll(spectroChartListView.getSelectionModel().getSelectedItem().getSeries());
 	}
 	
-	public void removeModelFromChart() {
-		mainChart.getData().remove(chartListView.getSelectionModel().getSelectedItem().getSeries());
+	public void removeSpectroModelFromChart() {
+		mainChart.getData().remove(spectroChartListView.getSelectionModel().getSelectedItem().getSeries());
+	}
+	
+	public void addElectroModelToChart() {
+		mainChart.getData().addAll(electroChartListView.getSelectionModel().getSelectedItem().getSeries());
+	}
+	
+	public void removeElectroModelFromChart() {
+		mainChart.getData().remove(electroChartListView.getSelectionModel().getSelectedItem().getSeries());
 	}
 	
 	public void exportToExcel() {
@@ -126,8 +152,6 @@ public class MainWindowController {
 				out.write("\t");
 				out.write("\n");
 			}
-			
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {

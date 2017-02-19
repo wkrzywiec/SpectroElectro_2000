@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
@@ -66,17 +67,37 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </ScatterChart>
-      <ListView fx:id="chartListView" layoutX="527.0" layoutY="35.0" onMouseClicked="#setTextFields" prefHeight="175.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="291.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="35.0">
+      <Label layoutX="525.0" layoutY="27.0" text="Absorption spectras" underline="true" AnchorPane.rightAnchor="113.0" AnchorPane.topAnchor="27.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ListView fx:id="spectroChartListView" layoutX="527.0" layoutY="35.0" prefHeight="97.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="45.0">
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem fx:id="menuAddChart" mnemonicParsing="false" onAction="#addModelToChart" text="Add to chart" />
-                  <MenuItem fx:id="menuRemoveChart" mnemonicParsing="false" onAction="#removeModelFromChart" text="Remove from chart" />
+                <MenuItem fx:id="menuAddSpectroChart" mnemonicParsing="false" onAction="#addSpectroModelToChart" text="Add to chart" />
+                  <MenuItem fx:id="menuRemoveSpectroChart" mnemonicParsing="false" onAction="#removeSpectroModelFromChart" text="Remove from chart" />
               </items>
             </ContextMenu>
          </contextMenu>
       </ListView>
-      <VBox layoutX="527.0" layoutY="216.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0">
+      <Label layoutX="526.0" layoutY="145.0" text="Cyclic voltammograms" underline="true" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="145.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ListView fx:id="electroChartListView" layoutX="527.0" layoutY="123.0" onMouseClicked="#setTextFields" prefHeight="85.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="163.0">
+         <contextMenu>
+            <ContextMenu>
+               <items>
+                  <MenuItem fx:id="menuAddElectroChart" mnemonicParsing="false" onAction="#addElectroModelToChart" text="Add to chart" />
+                  <MenuItem fx:id="menuRemoveElectroChart" mnemonicParsing="false" onAction="#removeElectroModelFromChart" text="Remove from chart" />
+               </items>
+            </ContextMenu>
+         </contextMenu>
+      </ListView>
+      <VBox layoutX="527.0" layoutY="250.0" prefHeight="234.0" prefWidth="211.0" spacing="10.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="253.0">
          <children>
             <Label layoutX="527.0" layoutY="220.0" text="Chart Details" underline="true" AnchorPane.bottomAnchor="267.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="214.0">
                <font>

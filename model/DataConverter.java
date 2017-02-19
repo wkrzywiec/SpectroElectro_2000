@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class DataConverter {
 
-	public ElectroModel convertFile(File file){
+	public ElectroModel convertFileToElectro(File file){
 		
 		ElectroModel electroModel = new ElectroModel();
 		electroModel.setScanName(file.getName());
@@ -29,5 +29,31 @@ public class DataConverter {
 			e.printStackTrace();
 		}
 		return electroModel;
+	}
+
+	public SpectroModel convertFileToSpectro(File file) {
+		
+		SpectroModel spectroModel = new SpectroModel();
+		spectroModel.setScanName(file.getName());
+		
+		try {
+			Scanner in = new Scanner(file);
+			in.useDelimiter(",");
+			DecimalFormat df = new DecimalFormat("#");
+	        df.setMaximumFractionDigits(8);
+	        
+			while (in.hasNext()) {
+				if (in.hasNextDouble()){
+					spectroModel.addAxisX(in.nextDouble());
+					spectroModel.addAxisY(Double.parseDouble(in.next()));
+				} else {
+					in.nextLine();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		return spectroModel;
 	}
 }
