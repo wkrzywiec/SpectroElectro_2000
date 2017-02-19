@@ -1,29 +1,74 @@
 package model;
 
-public class ChartDataModel {
+import java.util.ArrayList;
 
-	private String sample, scan, description, date;
+import javafx.scene.chart.XYChart;
+
+public class ChartDataModel {
 	
-	public ChartDataModel (String sample, String scan, String description, String date){
-		this.sample = sample;
-		this.scan = scan;
+	private String scanName, sampleName, description;
+	private String descriptionRow;
+	private ArrayList<Double> axisX = new ArrayList<Double>();
+	private ArrayList<Double> axisY = new ArrayList<Double>();
+	private XYChart.Series series = new XYChart.Series();
+	private int pointCount = 0;
+	
+	public String getScanName() {
+		return scanName;
+	}
+	
+	public void setScanName(String scanName) {
+		this.scanName = scanName;
+	}
+	
+	public String getSampleName() {
+		return sampleName;
+	}
+	
+	public void setSampleName(String sampleName) {
+		this.sampleName = sampleName;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
 		this.description = description;
-		this.date = date;
+	}
+	public Double getAxisX(int i) {
+		return axisX.get(i);
 	}
 	
-	public String getScanName(){
-		return this.scan;
+	public void addAxisX(Double x) {
+		axisX.add(x);
 	}
 	
-	public String getSampleName(){
-		return this.sample;
+	public Double getAxisY(int i) {
+		return axisY.get(i);
 	}
 	
-	public String getDescription(){
-		return this.description;
+	public void addAxisY(Double x) {
+		axisY.add(x);
 	}
 	
-	public String getDate(){
-		return this.date;
+	public void createSeries() {
+		
+		for (int i = 0; i < axisX.size(); i++) {
+			series.getData().add(new XYChart.Data(
+					getAxisX(i),
+					getAxisY(i)
+					));
+		series.setName(scanName);
+		}
+	}
+	
+	public XYChart.Series getSeries() {
+		return series;
+	}
+
+	public int getPointCount(){
+		pointCount = axisX.size();
+		return pointCount;
 	}
 }
