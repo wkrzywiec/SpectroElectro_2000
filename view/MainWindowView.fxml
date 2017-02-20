@@ -30,12 +30,7 @@
                   <MenuItem fx:id="menuTest" mnemonicParsing="false" text="Save" />
                   <MenuItem mnemonicParsing="false" text="Save As..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <Menu mnemonicParsing="false" text="Import data">
-                    <items>
-                        <MenuItem fx:id="menuLoadChartData" mnemonicParsing="false" onAction="#loadChartData" text="CV data" />
-                      <MenuItem mnemonicParsing="false" text="UV-vis data" />
-                    </items>
-                  </Menu>
+                  <MenuItem fx:id="menuLoadChartData" mnemonicParsing="false" onAction="#loadChartData" text="Import Data..." />
                   <Menu mnemonicParsing="false" text="Export data">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Export to CSV" />
@@ -47,9 +42,13 @@
               <MenuItem fx:id="menuClose" mnemonicParsing="false" onAction="#closeStage" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Analysis">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" text="Optical band gap..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Calibrate CV..." />
+              <MenuItem mnemonicParsing="false" text="Ionization Potential..." />
+                  <MenuItem mnemonicParsing="false" text="Electron Affinity..." />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -87,7 +86,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ListView fx:id="electroChartListView" layoutX="527.0" layoutY="123.0" onMouseClicked="#setTextFields" prefHeight="85.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="163.0">
+      <ListView fx:id="electroChartListView" layoutX="527.0" layoutY="123.0" onMouseClicked="#setTextFields" prefHeight="85.0" prefWidth="221.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="250.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="166.0">
          <contextMenu>
             <ContextMenu>
                <items>
@@ -97,7 +96,7 @@
             </ContextMenu>
          </contextMenu>
       </ListView>
-      <VBox layoutX="527.0" layoutY="250.0" prefHeight="234.0" prefWidth="211.0" spacing="10.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="253.0">
+      <VBox layoutX="527.0" layoutY="250.0" prefHeight="234.0" prefWidth="211.0" spacing="10.0" style="-fx-background-color: FFFFFF;" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0">
          <children>
             <Label layoutX="527.0" layoutY="220.0" text="Chart Details" underline="true" AnchorPane.bottomAnchor="267.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="214.0">
                <font>

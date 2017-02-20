@@ -89,10 +89,6 @@ public class MainWindowController {
 					SpectroModel spectroModel = dataConverter.convertFileToSpectro(file);
 					spectroChartList.add(spectroModel);
 					spectroModel.createSeries();
-					for (int i =0; i<spectroModel.getPointCount(); i++){
-						System.out.print(spectroModel.getAxisX(i) + " ");
-						System.out.println(spectroModel.getAxisY(i));
-					}	
 				}
 			 }
 		 }
