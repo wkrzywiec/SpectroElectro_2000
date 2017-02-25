@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -26,7 +30,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.ChartDataModel;
 import model.DataConverter;
 import model.ElectroModel;
@@ -129,6 +135,25 @@ public class MainWindowController {
 	}
 	
 	public void exportToExcel() {
+		 
+		ExportWindow.display("/view/ExportWindowView.fxml");
+		/*
+		 * 
+		 * try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ExportWindowView.fxml"));
+	        Parent root1;
+			root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+	        stage.initModality(Modality.APPLICATION_MODAL);
+	        stage.initStyle(StageStyle.UNDECORATED);
+	        stage.setTitle("ABC");
+	        stage.setScene(new Scene(root1));  
+	        stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Zapisz do pliku");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki MS Excel", "*.xls"));
@@ -152,6 +177,6 @@ public class MainWindowController {
 			e.printStackTrace();
 		} finally {
 			if (out!=null) out.close();
-		}
+		}*/
 	}
 }
