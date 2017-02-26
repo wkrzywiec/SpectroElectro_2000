@@ -28,6 +28,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
@@ -135,48 +137,34 @@ public class MainWindowController {
 	}
 	
 	public void exportToExcel() {
-		 
-		ExportWindow.display("/view/ExportWindowView.fxml");
-		/*
-		 * 
-		 * try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ExportWindowView.fxml"));
-	        Parent root1;
-			root1 = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-	        stage.initModality(Modality.APPLICATION_MODAL);
-	        stage.initStyle(StageStyle.UNDECORATED);
-	        stage.setTitle("ABC");
-	        stage.setScene(new Scene(root1));  
-	        stage.show();
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ExportWindowView.fxml"));
+		AnchorPane root;
+		try {
+			root = loader.load();
+			ExportWindowController connectionErrorController = loader.getController();
+			connectionErrorController.setMainWindowController(this);
+
+			Scene scene = new Scene(root);
+			Stage exportWindow = new Stage();
+			exportWindow.setScene(scene);
+			exportWindow.getIcons().add(new Image("/view/icon.png"));
+			exportWindow.initModality(Modality.APPLICATION_MODAL);
+			exportWindow.setResizable(false);
+			exportWindow.setTitle("Export to Excel");
+			//exportWindow.setMaxWidth(284);
+			//exportWindow.setMinWidth(216);
+			exportWindow.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Zapisz do pliku");
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki MS Excel", "*.xls"));
-		File file = fileChooser.showSaveDialog(primaryStage);
-		PrintWriter out = null;
-		try {
-			out = new PrintWriter(file);
-			ElectroModel modelToSave = electroChartList.get(0);
-			out.write("Sample Name \t" + modelToSave.getSampleName() + "\n");
-			out.write("Scan Name \t" + modelToSave.getScanName() + "\n");
-			out.write("Scan Description \t" + modelToSave.getDescription() + "\n");
-			out.write("\n");
-			for (int i = 0; i< modelToSave.getPointCount(); i++){
-				out.write(modelToSave.getAxisX(i).toString());
-				out.write("\t");
-				out.write(modelToSave.getAxisY(i).toString());
-				out.write("\t");
-				out.write("\n");
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if (out!=null) out.close();
-		}*/
+	}
+	
+	public ObservableList<ElectroModel> getElectroList() {
+		return electroChartList;
+	}
+	
+	public ObservableList<SpectroModel> getSpectroList() {
+		return spectroChartList;
 	}
 }

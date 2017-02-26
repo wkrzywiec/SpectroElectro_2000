@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="295.0" prefWidth="216.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.ExportWindowController">
+<AnchorPane prefHeight="377.0" prefWidth="216.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExportWindowController">
    <children>
-      <Button fx:id="bt1" layoutX="82.0" layoutY="123.0" mnemonicParsing="false" onAction="#close" text="Button" />
+      <VBox layoutX="7.0" layoutY="14.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Label layoutX="8.0" layoutY="14.0" text="Choose charts to export:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label text="Absorption spectras:" underline="true" />
+            <ListView fx:id="spectroChartListView" layoutX="8.0" layoutY="34.0" prefHeight="199.0" prefWidth="200.0" />
+            <Label text="Cyclic voltammograms:" underline="true" />
+            <ListView fx:id="electroChartListView" layoutX="10.0" layoutY="44.0" prefHeight="199.0" prefWidth="200.0" />
+            <Button fx:id="btnExport" layoutX="7.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="Export" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
