@@ -19,7 +19,7 @@
             <ListView fx:id="spectroChartListView" layoutX="8.0" layoutY="34.0" prefHeight="199.0" prefWidth="200.0" />
             <Label text="Cyclic voltammograms:" underline="true" />
             <ListView fx:id="electroChartListView" layoutX="10.0" layoutY="44.0" prefHeight="199.0" prefWidth="200.0" />
-            <Button fx:id="btnExport" layoutX="7.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="Export" />
+            <Button fx:id="btnExport" layoutX="7.0" layoutY="247.0" mnemonicParsing="false" onAction="#exportToExcel" prefHeight="25.0" prefWidth="212.0" text="Export" />
          </children>
       </VBox>
    </children>

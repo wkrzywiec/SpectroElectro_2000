@@ -136,7 +136,7 @@ public class MainWindowController {
 		mainChart.getData().remove(electroChartListView.getSelectionModel().getSelectedItem().getSeries());
 	}
 	
-	public void exportToExcel() {
+	public void exportToExcelWindow() {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ExportWindowView.fxml"));
 		AnchorPane root;
@@ -152,8 +152,6 @@ public class MainWindowController {
 			exportWindow.initModality(Modality.APPLICATION_MODAL);
 			exportWindow.setResizable(false);
 			exportWindow.setTitle("Export to Excel");
-			//exportWindow.setMaxWidth(284);
-			//exportWindow.setMinWidth(216);
 			exportWindow.show();
 		} catch (IOException e) {
 			e.printStackTrace();

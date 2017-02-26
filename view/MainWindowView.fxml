@@ -34,7 +34,7 @@
                   <Menu mnemonicParsing="false" text="Export data">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Export to CSV" />
-                        <MenuItem fx:id="menuExportToExcel" mnemonicParsing="false" onAction="#exportToExcel" text="Export to Excel" />
+                        <MenuItem fx:id="menuExportToExcel" mnemonicParsing="false" onAction="#exportToExcelWindow" text="Export to Excel" />
                       <MenuItem mnemonicParsing="false" text="Export to txt" />
                     </items>
                   </Menu>

@@ -1,11 +1,17 @@
 package controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.ElectroModel;
 import model.ElectroModelCellFactory;
@@ -15,7 +21,7 @@ import model.SpectroModelCellFactory;
 public class ExportWindowController {
 
 	private MainWindowController mainWindowController;
-	private Stage window;
+	private Stage exportWindow;
 	private ObservableList<ElectroModel> electroChartList;
 	private ObservableList<SpectroModel> spectroChartList;
 
@@ -23,8 +29,8 @@ public class ExportWindowController {
 	@FXML private ListView<SpectroModel> spectroChartListView;
 	@FXML Button btnExport;
 	
-	public void setStage(Stage window){
-		this.window = window;
+	public void setStage(Stage exportWindow){
+		this.exportWindow = exportWindow;
 	}
 	
 	public void setMainWindowController(MainWindowController mainWindowController){
@@ -48,7 +54,32 @@ public class ExportWindowController {
 	}
 
 	public void exportToExcel() {
-		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Zapisz do pliku");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki MS Excel", "*.xls"));
+		File file = fileChooser.showSaveDialog(exportWindow);
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(file);
+			ElectroModel modelToSave = electroChartList.get(0);
+			out.write("Sample Name \t" + modelToSave.getSampleName() + "\n");
+			out.write("Scan Name \t" + modelToSave.getScanName() + "\n");
+			out.write("Scan Description \t" + modelToSave.getDescription() + "\n");
+			out.write("\n");
+			for (int i = 0; i< modelToSave.getPointCount(); i++){
+				out.write(modelToSave.getAxisX(i).toString());
+				out.write("\t");
+				out.write(modelToSave.getAxisY(i).toString());
+				out.write("\t");
+				out.write("\n");
+			}
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (out!=null) out.close();
+		}
 	}
 	
 }
