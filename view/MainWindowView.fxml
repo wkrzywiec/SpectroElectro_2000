@@ -44,7 +44,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Analysis">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Optical band gap..." />
+                  <MenuItem mnemonicParsing="false" onAction="#openAbsorbanceWindow" text="Maximum Absorbance..." />
+                  <MenuItem mnemonicParsing="false" onAction="#openOpticalBandGapWindow" text="Optical band gap..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Calibrate CV..." />
               <MenuItem mnemonicParsing="false" text="Ionization Potential..." />

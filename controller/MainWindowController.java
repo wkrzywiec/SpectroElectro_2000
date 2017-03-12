@@ -142,8 +142,8 @@ public class MainWindowController {
 		AnchorPane root;
 		try {
 			root = loader.load();
-			ExportWindowController connectionErrorController = loader.getController();
-			connectionErrorController.setMainWindowController(this);
+			ExportWindowController exportWindowController = loader.getController();
+			exportWindowController.setMainWindowController(this);
 
 			Scene scene = new Scene(root);
 			Stage exportWindow = new Stage();
@@ -158,6 +158,47 @@ public class MainWindowController {
 		}
 	}
 	
+	public void openAbsorbanceWindow() {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AbsorbanceWindowView.fxml"));
+		AnchorPane root;
+		try {
+			root = loader.load();
+			AbsorbanceWindowController absorbanceWindowController = loader.getController();
+			absorbanceWindowController.setMainWindowController(this);
+
+			Scene scene = new Scene(root);
+			Stage exportWindow = new Stage();
+			exportWindow.setScene(scene);
+			exportWindow.getIcons().add(new Image("/view/icon.png"));
+			exportWindow.initModality(Modality.APPLICATION_MODAL);
+			exportWindow.setTitle("Determine Maximum Absorbance Wavelength");
+			exportWindow.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void openOpticalBandGapWindow() {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OpticalBandGapWindowView.fxml"));
+		AnchorPane root;
+		try {
+			root = loader.load();
+			OpticalBandGapWindowController opticalBandGapWindowController = loader.getController();
+			opticalBandGapWindowController.setMainWindowController(this);
+
+			Scene scene = new Scene(root);
+			Stage exportWindow = new Stage();
+			exportWindow.setScene(scene);
+			exportWindow.getIcons().add(new Image("/view/icon.png"));
+			exportWindow.initModality(Modality.APPLICATION_MODAL);
+			exportWindow.setTitle("Determine Maximum Absorbance Wavelength");
+			exportWindow.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public ObservableList<ElectroModel> getElectroList() {
 		return electroChartList;
 	}

@@ -55,8 +55,8 @@ public class ExportWindowController {
 
 	public void exportToExcel() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Zapisz do pliku");
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Pliki MS Excel", "*.xls"));
+		fileChooser.setTitle("Save to File");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("File MS Excel (*.xls)", "*.xls"));
 		File file = fileChooser.showSaveDialog(exportWindow);
 		PrintWriter out = null;
 		try {
@@ -79,6 +79,7 @@ public class ExportWindowController {
 			e.printStackTrace();
 		} finally {
 			if (out!=null) out.close();
+			//exportWindow.close();
 		}
 	}
 	
